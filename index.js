@@ -142,7 +142,7 @@ app.post('/test', async (req,res)=>{
     }
     console.log(preferences)
     // res.status(200).send("hello")
-    await fs.writeFile('./data/account.txt',JSON.stringify({preferences},null,2),(err,data)=>{
+    await fs.appendFile('./data/account.txt',"abrar",(err,data)=>{
       if(err) return res.status(500)      
       return res.status(200).send('updated successfully')
       
