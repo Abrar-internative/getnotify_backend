@@ -24,4 +24,4 @@
     "timezone": "(GMT-09:00) Alaska",
     "currency": "bitcoin"
   }
-}}
+}

@@ -29,8 +29,8 @@ const preferences = async (req, res) => {
   }
    fs.chmod('./data/account.txt',0o600,async ()=>{
     await fs.open('./data/account.txt','r+',async function(err,fd){
-        // console.log(fd)
-        await fs.readFile('./data/account.txt',(err,data)=>{
+        console.log(fd)
+         fs.readFile('./data/account.txt',(err,data)=>{
              console.log(JSON.parse(data))
              const result = JSON.parse(data)
              fs.writeFileSync('./data/account.txt',JSON.stringify({...result,preferences},null,2),{flag:'r+'},(err,data)=>{
