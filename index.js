@@ -128,18 +128,20 @@ app.post('/noti',(req,res)=>{
 })
 app.post('/test',(req,res)=>{
   console.log(req.body)
-  // const {mode,read,link,attachment,send,notification,readCount,linkCount} = req.body
+  const {mode,read,link,attachment,send,notification,readCount,linkCount} = req.body
 
-  //   const preferences = {
-  //       mode: mode || false,
-  //       read: read ? true : false,
-  //       link: link || false,
-  //       attachment: attachment || false,
-  //       send: send || 'individually',
-  //       notification: notification || 'sms',
-  //       readCount: readCount || 3,
-  //       linkCount: linkCount || 2,
-  //   }
+    const preferences = {
+        mode: mode || false,
+        read: read ? true : false,
+        link: link || false,
+        attachment: attachment || false,
+        send: send || 'individually',
+        notification: notification || 'sms',
+        readCount: readCount || 3,
+        linkCount: linkCount || 2,
+    }
+    console.log(preferences)
+    res.status(200).send("hello")
     
   //   jsonReader('./data/account.txt', (err,result)=>{
   //       fs.writeFile('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
