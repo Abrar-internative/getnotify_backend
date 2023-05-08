@@ -126,7 +126,7 @@ app.get('/noti',(req,res)=>{
 app.post('/noti',(req,res)=>{
   res.status(200).send("gotchya again")
 })
-app.post('/test',(req,res)=>{
+app.post('/test', async (req,res)=>{
   // console.log(req.body)
   const {mode,read,link,attachment,send,notification,readCount,linkCount} = req.body
 
@@ -142,9 +142,8 @@ app.post('/test',(req,res)=>{
     }
     console.log(preferences)
     // res.status(200).send("hello")
-    fs.writeFile('./data/account.txt',JSON.stringify({preferences},null,2),(err,data)=>{
-      if(err) return res.status(500)
-      
+    await fs.writeFile('./data/account.txt',JSON.stringify({preferences},null,2),(err,data)=>{
+      if(err) return res.status(500)      
       return res.status(200).send('updated successfully')
       
   })
