@@ -32,7 +32,7 @@ const preferences = async (req, res) => {
     await fs.readFile('./data/account.txt',(err,data)=>{
         //  console.log(JSON.parse(data))
          const result = JSON.parse(data)
-         fs.writeFileSync('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
+         fs.writeFileSync('./data/account.txt',JSON.stringify({...result,preferences},null,2),{flag:'r+'},(err,data)=>{
                 if(err) return res.status(500)
                 
                 return res.status(200).send('updated successfully')
