@@ -127,7 +127,7 @@ app.post('/noti',(req,res)=>{
   res.status(200).send("gotchya again")
 })
 app.post('/test',(req,res)=>{
-  console.log(req.body)
+  // console.log(req.body)
   const {mode,read,link,attachment,send,notification,readCount,linkCount} = req.body
 
     const preferences = {
@@ -141,16 +141,17 @@ app.post('/test',(req,res)=>{
         linkCount: linkCount || 2,
     }
     console.log(preferences)
-    res.status(200).send("hello")
+    // res.status(200).send("hello")
     
-  //   jsonReader('./data/account.txt', (err,result)=>{
-  //       fs.writeFile('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
-  //           if(err) return res.status(500)
-            
-  //           return res.status(200).send('updated successfully')
-            
-  //       })
-  //   })
+    jsonReader('./data/account.txt', async (err,result)=>{
+      if(err) return res.status(500).send(err.message)
+      await fs.writeFile('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
+          if(err) return res.status(500)
+          
+          return res.status(200).send('updated successfully')
+          
+      })
+    })
 })
 
 app.use('/update', require('./routes/update'));
