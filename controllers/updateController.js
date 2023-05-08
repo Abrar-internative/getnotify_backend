@@ -1,5 +1,5 @@
 const fs = require('fs');
-
+const path = require('path')
 // function jsonReader(filePath, cb) {
 //     fs.readFile(filePath, (err, fileData) => {
 //       if (err) {
@@ -8,7 +8,7 @@ const fs = require('fs');
 //       try {
 //         const object = JSON.parse(fileData);
 //         return cb && cb(null, object);
-//       } catch (err) {
+//       } catch (err) { 
 //         return cb && cb(err);
 //       }
 //     });
@@ -27,21 +27,38 @@ const preferences = async (req, res) => {
       readCount: readCount || 3,
       linkCount: linkCount || 2,
   }
-  await fs.open('./data/account.txt','r+',async function(err,fd){
-    // console.log(fd)
-    await fs.readFile('./data/account.txt',(err,data)=>{
-         console.log(JSON.parse(data))
-        //  const result = JSON.parse(data)
-        //  fs.writeFileSync('./data/account.txt',JSON.stringify({...result,preferences},null,2),{flag:'r+'},(err,data)=>{
-        //         if(err) return res.status(500)
-                
-        //         return res.status(200).send('updated successfully')
-                
-        //     })
-        return res.status(200).send('updated successfully')
-       })
-    
+   fs.chmod('./data/account.txt',0o600,async ()=>{
+    await fs.open('./data/account.txt','r+',async function(err,fd){
+        // console.log(fd)
+        await fs.readFile('./data/account.txt',(err,data)=>{
+             console.log(JSON.parse(data))
+             const result = JSON.parse(data)
+             fs.writeFileSync('./data/account.txt',JSON.stringify({...result,preferences},null,2),{flag:'r+'},(err,data)=>{
+                    if(err) return res.status(500)
+                    
+                    return res.status(200).send('updated successfully')
+                    
+                })
+            return res.status(200).send('updated successfully')
+           })
+        
+      })
   })
+  // await fs.open('./data/account.txt','r+',async function(err,fd){
+  //   // console.log(fd)
+  //   await fs.readFile('./data/account.txt',(err,data)=>{
+  //        console.log(JSON.parse(data))
+  //        const result = JSON.parse(data)
+  //        fs.writeFileSync('./data/account.txt',JSON.stringify({...result,preferences},null,2),{flag:'r+'},(err,data)=>{
+  //               if(err) return res.status(500)
+                
+  //               return res.status(200).send('updated successfully')
+                
+  //           })
+  //       return res.status(200).send('updated successfully')
+  //      })
+    
+  // })
     
 }
 const userInfo = async (req, res) => {
