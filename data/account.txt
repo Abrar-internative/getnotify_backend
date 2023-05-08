@@ -1,0 +1,27 @@
+{
+  "preferences": {
+    "mode": true,
+    "read": false,
+    "link": false,
+    "attachment": true,
+    "send": "individually",
+    "notification": "sms",
+    "readCount": "13",
+    "linkCount": "22"
+  },
+  "general": {
+    "avatar": "avatar11",
+    "firstname": "Syed",
+    "lastname": "Abrar",
+    "email": "abrar123789ali@gmail.com",
+    "company": "Internative Labs",
+    "phone": "03243368763",
+    "address": "falcon heights c-408",
+    "state": "sindh",
+    "zipCode": "6700",
+    "country": "france",
+    "language": "french",
+    "timezone": "(GMT-09:00) Alaska",
+    "currency": "bitcoin"
+  }
+}
