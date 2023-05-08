@@ -27,8 +27,8 @@ io.on('connection',socket=>{
 )
 httpServer.listen(5500)
 
-function jsonReader(filePath, cb) {
-  fs.readFile(filePath, (err, fileData) => {
+ function jsonReader(filePath, cb) {
+  fs.readFileSync(filePath, (err, fileData) => {
     if (err) {
       return cb && cb(err);
     }
@@ -126,7 +126,7 @@ app.get('/noti',(req,res)=>{
 app.post('/noti',(req,res)=>{
   res.status(200).send("gotchya again")
 })
-app.post('/test', (req,res)=>{
+app.post('/test', async (req,res)=>{
   // console.log(req.body)
   const {mode,read,link,attachment,send,notification,readCount,linkCount} = req.body
 
@@ -140,23 +140,20 @@ app.post('/test', (req,res)=>{
         readCount: readCount || 3,
         linkCount: linkCount || 2,
     }
-    console.log(preferences)
-    // res.status(200).send("hello")
-    try{
-      fs.appendFileSync('./data/account.txt',"abrar")
-    }
-    catch(err){
-          console.log(err)
-        }
-        return res.status(200).send('updated successfully')
-  //   (err,data)=>{
-  //     if(err) return res.status(500)      
-  //     return res.status(200).send('updated successfully')
-      
-  // })
-    // jsonReader('./data/account.txt', async (err,result)=>{
+     await fs.readFile('./data/account.txt',(err,data)=>{
+       console.log(JSON.parse(data))
+       const result = JSON.parse(data)
+       fs.writeFileSync('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
+              if(err) return res.status(500)
+              
+              return res.status(200).send('updated successfully')
+              
+          })
+     }) 
+    
+    // jsonReader('./data/account.txt', (err,result)=>{
     //   if(err) return res.status(500).send(err.message)
-    //   await fs.writeFile('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
+    //   fs.writeFileSync('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
     //       if(err) return res.status(500)
           
     //       return res.status(200).send('updated successfully')

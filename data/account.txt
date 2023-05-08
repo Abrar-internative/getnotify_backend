@@ -1,6 +1,6 @@
 {
   "preferences": {
-    "mode": false,
+    "mode": true,
     "read": false,
     "link": false,
     "attachment": false,
