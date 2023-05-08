@@ -142,7 +142,7 @@ app.post('/test',(req,res)=>{
     }
     console.log(preferences)
     // res.status(200).send("hello")
-    fs.writeFile('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
+    fs.writeFile('./data/account.txt',JSON.stringify({preferences},null,2),(err,data)=>{
       if(err) return res.status(500)
       
       return res.status(200).send('updated successfully')
