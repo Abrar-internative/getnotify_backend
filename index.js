@@ -140,16 +140,30 @@ app.post('/test', async (req,res)=>{
         readCount: readCount || 3,
         linkCount: linkCount || 2,
     }
-     await fs.readFile('./data/account.txt',(err,data)=>{
-       console.log(JSON.parse(data))
-       const result = JSON.parse(data)
-       fs.writeFileSync('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
-              if(err) return res.status(500)
+    await fs.open('./data/account.txt','r+',async function(err,fd){
+      console.log(fd)
+      await fs.readFile('./data/account.txt',(err,data)=>{
+           console.log(JSON.parse(data))
+           const result = JSON.parse(data)
+           fs.writeFileSync('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
+                  if(err) return res.status(500)
+                  
+                  return res.status(200).send('updated successfully')
+                  
+              })
+         })
+      return res.status(200).send('updated successfully')
+    })
+    //  await fs.readFile('./data/account.txt',(err,data)=>{
+    //    console.log(JSON.parse(data))
+    //    const result = JSON.parse(data)
+    //    fs.writeFileSync('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
+    //           if(err) return res.status(500)
               
-              return res.status(200).send('updated successfully')
+    //           return res.status(200).send('updated successfully')
               
-          })
-     }) 
+    //       })
+    //  }) 
     
     // jsonReader('./data/account.txt', (err,result)=>{
     //   if(err) return res.status(500).send(err.message)
