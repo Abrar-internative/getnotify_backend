@@ -143,7 +143,9 @@ app.post('/test',(req,res)=>{
     jsonReader('./data/account.txt', (err,result)=>{
         fs.writeFile('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
             if(err) return res.status(500)
-            res.status(200).send('updated successfully')
+            
+            return res.status(200).send('updated successfully')
+            
         })
     })
 })
