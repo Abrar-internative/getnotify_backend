@@ -112,6 +112,7 @@ const corsOptions = {
   } 
 }
 app.use(cors({
+  origin:'*',
   optionsSuccessStatus: 200,
 }))
 app.use(function(req, res, next) {
