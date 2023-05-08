@@ -26,8 +26,7 @@ io.on('connection',socket=>{
 }
 )
 httpServer.listen(5500)
-// const fsPromises = require('fs').promises;
-// const path = require('path');
+
 function jsonReader(filePath, cb) {
   fs.readFile(filePath, (err, fileData) => {
     if (err) {
@@ -124,6 +123,9 @@ app.use(function(req, res, next) {
 app.get('/noti',(req,res)=>{
   res.status(200).send("gotchya")
 })
+app.post('/noti',(req,res)=>{
+  res.status(200).send("gotchya again")
+})
 app.post('/test',(req,res)=>{
   const {mode,read,link,attachment,send,notification,readCount,linkCount} = req.body
 
@@ -145,10 +147,8 @@ app.post('/test',(req,res)=>{
         })
     })
 })
+
 app.use('/update', require('./routes/update'));
-app.post('/noti',(req,res)=>{
-  res.status(200).send("gotchya again")
-})
 app.get('/account', (req, res) => {
   fs.readFile('./data/account.txt','utf8',(err,data) => { 
     // console.log(data)

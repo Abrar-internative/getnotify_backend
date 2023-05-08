@@ -1,13 +1,13 @@
 {
   "preferences": {
-    "mode": true,
+    "mode": false,
     "read": false,
     "link": false,
-    "attachment": true,
+    "attachment": false,
     "send": "individually",
     "notification": "sms",
-    "readCount": "13",
-    "linkCount": "22"
+    "readCount": 3,
+    "linkCount": 2
   },
   "general": {
     "avatar": "avatar11",
