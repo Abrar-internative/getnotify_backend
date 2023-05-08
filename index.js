@@ -142,16 +142,21 @@ app.post('/test',(req,res)=>{
     }
     console.log(preferences)
     // res.status(200).send("hello")
-    
-    jsonReader('./data/account.txt', async (err,result)=>{
-      if(err) return res.status(500).send(err.message)
-      await fs.writeFile('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
-          if(err) return res.status(500)
+    fs.writeFile('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
+      if(err) return res.status(500)
+      
+      return res.status(200).send('updated successfully')
+      
+  })
+    // jsonReader('./data/account.txt', async (err,result)=>{
+    //   if(err) return res.status(500).send(err.message)
+    //   await fs.writeFile('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
+    //       if(err) return res.status(500)
           
-          return res.status(200).send('updated successfully')
+    //       return res.status(200).send('updated successfully')
           
-      })
-    })
+    //   })
+    // })
 })
 
 app.use('/update', require('./routes/update'));
