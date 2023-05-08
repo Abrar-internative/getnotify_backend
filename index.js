@@ -88,7 +88,7 @@ app.use(logger) ;//log requests to console and logfile
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // app.use(cookieParser());
-
+//https://stormy-worm-scrubs.cyclic.app
 const whitelist = ["http://localhost:3001","http://localhost:3000","https://getnotify.netlify.app"]
 const corsOptions = {
   origin: function (origin, callback) {
@@ -112,7 +112,9 @@ app.get('/noti',(req,res)=>{
   res.status(200).send("gotchya")
 })
 app.use('/update', require('./routes/update'));
-
+app.post('/noti',(req,res)=>{
+  res.status(200).send("gotchya again")
+})
 app.get('/account', (req, res) => {
   fs.readFile('./data/account.txt','utf8',(err,data) => { 
     // console.log(data)
