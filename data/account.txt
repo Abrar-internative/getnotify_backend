@@ -1,7 +1,7 @@
 {
   "preferences": {
     "mode": false,
-    "read": false,
+    "read": true,
     "link": false,
     "attachment": false,
     "send": "individually",
