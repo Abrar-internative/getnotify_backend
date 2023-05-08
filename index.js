@@ -111,6 +111,27 @@ app.use(function(req, res, next) {
 app.get('/noti',(req,res)=>{
   res.status(200).send("gotchya")
 })
+app.post('/test',(req,res)=>{
+  const {mode,read,link,attachment,send,notification,readCount,linkCount} = req.body
+
+    const preferences = {
+        mode: mode || false,
+        read: read ? true : false,
+        link: link || false,
+        attachment: attachment || false,
+        send: send || 'individually',
+        notification: notification || 'sms',
+        readCount: readCount || 3,
+        linkCount: linkCount || 2,
+    }
+    
+    jsonReader('./data/account.txt', (err,result)=>{
+        fs.writeFile('./data/account.txt',JSON.stringify({...result,preferences},null,2),(err,data)=>{
+            if(err) return res.status(500)
+            res.status(200).send('updated successfully')
+        })
+    })
+})
 app.use('/update', require('./routes/update'));
 app.post('/noti',(req,res)=>{
   res.status(200).send("gotchya again")
