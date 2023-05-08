@@ -28,7 +28,19 @@ io.on('connection',socket=>{
 httpServer.listen(5500)
 // const fsPromises = require('fs').promises;
 // const path = require('path');
-
+function jsonReader(filePath, cb) {
+  fs.readFile(filePath, (err, fileData) => {
+    if (err) {
+      return cb && cb(err);
+    }
+    try {
+      const object = JSON.parse(fileData);
+      return cb && cb(null, object);
+    } catch (err) {
+      return cb && cb(err);
+    }
+  });
+}
 const data = {
     general: {
     //   avatar: avatar11, 
