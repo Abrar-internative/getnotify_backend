@@ -16,5 +16,5 @@ const userInfo = async (req, res) => {
         res.sendStatus(200);
     })
 }
-//comment
+
 module.exports = {preferences,userInfo}
