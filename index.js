@@ -49,13 +49,6 @@ app.use(function(req, res, next) {
 
 app.use('/update', require('./routes/update'));
 app.use('/get', require('./routes/get'));
-app.get('/account', (req, res) => {
-  fs.readFile('./data/account.txt','utf8',(err,data) => { 
-    // console.log(data)
-    res.status(200).send({data})
-  })  
-      
-})
 
 mongoose.connection.once('open', ()=>{
   console.log('Connected to MongoDB');
